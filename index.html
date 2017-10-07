@@ -1,0 +1,124 @@
+<html>
+	<head>
+		<title>SVG DRAWING</title>
+		<style>
+			#draw_svg:hover {
+				cursor : pointer
+			}
+		</style>
+		<script src="control.js"></script>
+	</head>
+	<body>
+		<div>
+
+			<svg width="700" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+				onload="initialize()">
+					
+				<g id="draw_svg" onmousedown="onMouseDown(evt)" onmouseup="onMouseUp()">
+										
+					<text id="title" text-anchor="middle" font-family="serif" font-size="24" y="25" x="110">Drawing with SVG</text>
+					
+					<g id="display_position">
+						<rect id="format" stroke-width="1" stroke="black" fill="none" height="25" width="70" y="5" x="565"/>
+						<text id="position" text-anchor="middle" font-family="serif" font-size="18" y="25" x="600"> </text>
+					</g>
+					
+					<rect id="draw_area" stroke-width="3" stroke="black" fill="#00ffff" height="413" width="634" y="32" x="3"
+						onmousemove="draw(evt);getPosition(evt)" 
+						onmouseover="onMouseOver()"
+						onmouseout="cleanPosition()"/>
+					
+					<g id="polyline_button" opacity="0.25" onclick="changeTool(1)">
+						<title>Pencil</title>
+						<rect id="format" stroke-width="1" stroke="black" fill="#00ffff" height="35" width="35" y="40" x="645"/>
+						<polyline id="image" stroke-width="1" stroke="black" fill="none" points="649,56 651,56 652,56 652,55 653,55 654,54 654,53 655,53 655,52
+						   656,52 657,52 658,52 659,52 660,52 661,52 662,52 662,53 663,54 663,55 663,56 664,56 664,57 664,58 664,59 665,60 665,61 665,62 666,63
+						   666,64 667,65 668,66 669,66 670,66 671,66 672,66 672,65 673,64 674,63 675,62 675,61 676,60 676,59 676,58 "/>
+					</g>
+					
+					<g id="line_button" opacity="0.25" onclick="changeTool(2)">
+						<title>Straight Line</title>
+						<rect id="format" stroke-width="1" stroke="black" fill="#00ffff" height="35" width="35" y="80" x="645"/>
+						<line id="image" stroke-width="2" stroke="black" fill="none" y2="94" x2="649" y1="102" x1="676"/>
+					</g>
+					
+					<g id="rect_button" opacity="0.25" onclick="changeTool(3)">
+						<title>Rectangle</title>
+						<rect id="format" stroke-width="1" stroke="black" fill="#00ffff" height="35" width="35" y="120" x="645"/>
+						<rect id="image" fill="black" height="20" width="25" y="128" x="650"/>
+					</g>
+					
+					<g id="ellipse_button" opacity="0.25" onclick="changeTool(4)">
+						<title>Ellipse</title>
+						<rect id="format" stroke-width="1" stroke="black" fill="#00ffff" height="35" width="35" y="160" x="645"/>
+						<ellipse id="image" ry="10" rx="15" fill="black" cy="177" cx="663"/>
+					</g>
+					
+					<g id="clean_button" onclick="cleanDraw()">
+						<title>Clean Drawing</title>
+						<rect id="format" stroke-width="1" stroke="black" fill="#00ffff" height="30" width="60" y="450" x="6"/>
+						<text id="label" text-anchor="middle" font-family="serif" font-size="18" y="470" x="35">Clean</text>
+					</g>
+					
+					<g id="color_black_button" opacity="0.25" onclick="changeColor(1)">
+						<title>Black</title>
+						<rect id="color_black" fill="black" height="30" width="30" y="450" x="100"/>
+					</g>
+					
+					<g id="color_red_button" opacity="0.25" onclick="changeColor(2)">
+						<title>Red</title>
+						<rect id="color_red" fill="red" height="30" width="30" y="450" x="150"/>
+					</g>
+					
+					<g id="color_blue_button" opacity="0.25" onclick="changeColor(3)">
+						<title>Blue</title>
+						<rect id="color_blue" fill="blue" height="30" width="30" y="450" x="200"/>
+					</g>
+					
+					<g id="color_green_button" opacity="0.25" onclick="changeColor(4)">
+						<title>Green</title>
+						<rect id="color_green" fill="green" height="30" width="30" y="450" x="250"/>
+					</g>
+					
+					<g id="color_yellow_button" opacity="0.25" onclick="changeColor(5)">
+						<title>Yellow</title>
+						<rect id="color_yellow" fill="yellow" height="30" width="30" y="450" x="300"/>
+					</g>
+					
+					<g id="stroke-width_1_button" opacity="0.25" onclick="changeStrokeWidth(1)">
+						<title>Thickness Size 1</title>
+						<rect id="format" stroke-width="1" stroke="black" fill="#00ffff" height="30" width="30" y="450" x="377"/>
+						<line id="image" stroke-width="1" stroke="black" fill="none" y2="465" x2="380" y1="465" x1="405"/>
+					</g>
+					
+					<g id="stroke-width_2_button" opacity="0.25" onclick="changeStrokeWidth(2)">
+						<title>Thickness Size 2</title>
+						<rect id="format" stroke-width="1" stroke="black" fill="#00ffff" height="30" width="30" y="450" x="427"/>
+						<line id="image" stroke-width="2" stroke="black" fill="none" y2="465" x2="430" y1="465" x1="455"/>
+					</g>
+					
+					<g id="stroke-width_3_button" opacity="0.25" onclick="changeStrokeWidth(3)">
+						<title>Thickness Size 3</title>
+						<rect id="format" stroke-width="1" stroke="black" fill="#00ffff" height="30" width="30" y="450" x="477"/>
+						<line id="image" stroke-width="3" stroke="black" fill="none" y2="465" x2="480" y1="465" x1="505"/>
+					</g>
+					
+					<g id="stroke-width_4_button" opacity="0.25" onclick="changeStrokeWidth(4)">
+						<title>Thickness Size 4</title>
+						<rect id="format" stroke-width="1" stroke="black" fill="#00ffff" height="30" width="30" y="450" x="527"/>
+						<line id="image" stroke-width="4" stroke="black" fill="none" y2="465" x2="530" y1="465" x1="555"/>
+					</g>
+					
+					<g id="stroke-width_5_button" opacity="0.25" onclick="changeStrokeWidth(5)">
+						<title>Thickness Size 5</title>
+						<rect id="format" stroke-width="1" stroke="black" fill="#00ffff" height="30" width="30" y="450" x="577"/>
+						<line id="image" stroke-width="5" stroke="black" fill="none" y2="465" x2="580" y1="465" x1="605"/>
+					</g>
+					
+				</g>
+				
+			</svg>
+
+		</div>
+	</body>
+</html>
